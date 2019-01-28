@@ -1,0 +1,41 @@
+# Copyright 2019 Red Hat, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+---
+# tasks/main.yaml
+borgbackup_task_manager:
+  - pre
+  - install
+  - config
+
+# tasks/config.yaml
+borgbackup_user_name: borgbackup
+borgbackup_user_group: borgbackup
+borgbackup_user_home: /var/lib/borgbackup
+borgbackup_user_home_mode: 0755
+# borgbackup_user_shell:
+
+# tasks/install.yaml
+borgbackup_git_dest: "{{ ansible_user_dir }}/src/github.com/borgbackup/borg"
+borgbackup_git_uri: https://github.com/borgbackup/borg
+borgbackup_git_version: master
+# borgbackup_git_update
+
+borgbackup_install_method: pip
+
+borgbackup_pip_name: borgbackup
+# borgbackup_pip_executable:
+# borgbackup_pip_extra_args:
+# borgbackup_pip_version:
+# borgbackup_pip_virtualenv_python:
+# borgbackup_pip_virtualenv:
