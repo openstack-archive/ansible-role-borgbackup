@@ -1,0 +1,57 @@
+---
+- job:
+    name: ansible-role-borgbackup-base
+    parent: unittests
+    pre-run: tests/playbooks/pre.yaml
+    run: tests/playbooks/run.yaml
+    roles:
+      - zuul: openstack/ansible-role-borgbackup
+
+# Testing for borgbackup_install_method: pip
+- job:
+    name: ansible-role-borgbackup
+    parent: ansible-role-borgbackup-base
+
+- job:
+    name: ansible-role-borgbackup-fedora-latest
+    parent: ansible-role-borgbackup
+    nodeset: fedora-latest
+
+- job:
+    name: ansible-role-borgbackup-ubuntu-bionic
+    parent: ansible-role-borgbackup
+    nodeset: ubuntu-bionic
+
+# Testing for borgbackup_install_method: git
+- job:
+    name: ansible-role-borgbackup-src
+    parent: ansible-role-borgbackup-base
+    vars:
+      borgbackup_git_update: false
+      borgbackup_install_method: git
+
+- job:
+    name: ansible-role-borgbackup-src-fedora-latest
+    parent: ansible-role-borgbackup-src
+    nodeset: fedora-latest
+
+- job:
+    name: ansible-role-borgbackup-src-ubuntu-bionic
+    parent: ansible-role-borgbackup-src
+    nodeset: ubuntu-bionic
+
+- project:
+    check:
+      jobs:
+        - ansible-role-borgbackup-fedora-latest
+        - ansible-role-borgbackup-ubuntu-bionic
+        - ansible-role-borgbackup-src-fedora-latest
+        - ansible-role-borgbackup-src-ubuntu-bionic
+        - tox-linters
+    gate:
+      jobs:
+        - ansible-role-borgbackup-fedora-latest
+        - ansible-role-borgbackup-ubuntu-bionic
+        - ansible-role-borgbackup-src-fedora-latest
+        - ansible-role-borgbackup-src-ubuntu-bionic
+        - tox-linters
