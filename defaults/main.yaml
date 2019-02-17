@@ -21,6 +21,7 @@ borgbackup_task_manager:
 # tasks/config.yaml
 borgbackup_user_name: borgbackup
 borgbackup_user_group: borgbackup
+borgbackup_user_groups: borgbackup
 borgbackup_user_home: /var/lib/borgbackup
 borgbackup_user_home_mode: 0755
 # borgbackup_user_shell:

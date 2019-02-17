@@ -21,7 +21,7 @@
   become: true
   user:
     createhome: true
-    group: "{{ borgbackup_user_group }}"
+    groups: "{{ borgbackup_user_groups | default(borgbackup_user_group) }}"
     home: "{{ borgbackup_user_home }}"
     name: "{{ borgbackup_user_name }}"
     shell: "{{ borgbackup_user_shell|default(omit) }}"
