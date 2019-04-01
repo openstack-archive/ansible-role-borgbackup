@@ -1,0 +1,8 @@
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Mon, 01 Apr 2019 18:52:41 +0000
+Reviewed-on: https://review.openstack.org/649054
+Project: openstack/ansible-role-borgbackup
+Branch: refs/heads/master
