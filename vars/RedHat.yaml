@@ -13,6 +13,9 @@
 # under the License.
 ---
 __borgbackup_build_depends:
+  - gcc
+  - gcc-c++
   - libacl-devel
+  - openssl
   - openssl-devel
   - python3-Cython
