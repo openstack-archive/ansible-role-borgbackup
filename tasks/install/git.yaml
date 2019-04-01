@@ -19,6 +19,18 @@
     update: "{{ borgbackup_git_update|default(omit) }}"
     version: "{{ borgbackup_git_version }}"
 
+# NOTE(pabelanger): It seems borgbackup now requires us to bootstrap
+# python dependencies first, before actually installing borgbackup.
+- name: Install borgbackup requirements
+  become: true
+  pip:
+    executable: "{{ borgbackup_pip_executable|default(omit) }}"
+    name:
+      - Cython
+      - pkgconfig
+    virtualenv_python: "{{ borgbackup_pip_virtualenv_python|default(omit) }}"
+    virtualenv: "{{ borgbackup_pip_virtualenv|default(omit) }}"
+
 - name: Set borgbackup_pip_name to local git repo
   set_fact:
     borgbackup_pip_name: "file://{{ borgbackup_git_dest }}"
